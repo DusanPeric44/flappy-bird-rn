@@ -5,6 +5,7 @@ import {
   Text,
   View,
   TouchableWithoutFeedback,
+  Image,
 } from "react-native";
 import Bird from "./src/components/Bird";
 import { useEffect, useState } from "react";
@@ -110,11 +111,14 @@ export default function App() {
   return (
     <TouchableWithoutFeedback onPress={jump}>
       <View style={styles.container}>
+        <Image
+          source={require("./assets/background.png")}
+          style={styles.backgroundImage}
+        />
         {isGameOver && (
-          <Text style={{ fontSize: 30, zIndex: 2 }}>
-            Game Over Score:{score}
-          </Text>
+          <Text style={{ fontSize: 30, zIndex: 2 }}>Game Over</Text>
         )}
+        <Text style={styles.score}>Score: {score}</Text>
         <Bird birdBottom={birdBottom} birdLeft={birdLeft} />
 
         <Obstacles
@@ -145,5 +149,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  backgroundImage: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  score: {
+    fontSize: 32,
+    top: 50,
+    position: "absolute",
+    zIndex: 1,
+    color: "white",
   },
 });
